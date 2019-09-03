@@ -13,8 +13,7 @@ server.get('/api/users', (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        err: err,
-        message: 'failed to get users'
+        error: 'The users information could not be retrieved.'
       })
     })
 })
@@ -37,7 +36,6 @@ server.get('/api/users/:id', (req, res) => {
 
 server.post('/api/users', (req, res) => {
   const newUser = req.body
-  console.log(req.body)
 
   if ( req.body.name === undefined || req.body.bio === undefined) {
     res.status(400).json({
