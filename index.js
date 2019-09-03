@@ -53,6 +53,28 @@ server.post('/api/users', (req, res) => {
   }
 })
 
+server.delete('/api/users/:id', (req, res) => {
+  const { id } = req.params
+
+  db.remove(id)
+    .then(user => {
+      if (user) {
+        res.json({
+          message: 'The user has been deleted'
+        }) 
+      } else { 
+        res.status(404).json({
+          message: 'The user with the specified ID does not exist'
+        })
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: 'The user could not be removed'
+      })
+    })
+})
+
 server.listen(3636, () => {
   console.log('Server is running on port 3636...')
 })
