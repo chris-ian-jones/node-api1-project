@@ -23,13 +23,12 @@ server.get('/api/users/:id', (req, res) => {
   db.findById(id)
     .then(user => {
       user ? res.json(user) : res.status(404).json({
-        message: 'invaled user id'
+        message: 'The user with the specified ID does not exist.'
       })
     })
     .catch(err => {
       res.status(500).json({
-        err: err,
-        message: 'failed to get user by id'
+        error: 'The user information could not be retrieved.'
       })
     })
 })
