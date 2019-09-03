@@ -35,6 +35,23 @@ server.get('/api/users/:id', (req, res) => {
     })
 })
 
+server.post('/api/users', (req, res) => {
+  const newUser = req.body
+
+  db.insert(newUser)
+    .then(user => {
+      user ? res.json(user) : res.status(404).json({
+        message: 'invaled new user data'
+      })
+    })
+    .catch(err => {
+      res.status(500).json({
+        err: err,
+        message: 'failed to create new user'
+      })
+    })
+})
+
 server.listen(3636, () => {
   console.log('Server is running on port 3636...')
 })
