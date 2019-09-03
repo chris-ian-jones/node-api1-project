@@ -60,7 +60,8 @@ server.delete('/api/users/:id', (req, res) => {
     .then(user => {
       if (user) {
         res.json({
-          message: 'The user has been deleted'
+          id: id,
+          message: 'This user has been deleted'
         }) 
       } else { 
         res.status(404).json({
